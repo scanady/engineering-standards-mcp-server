@@ -5,6 +5,7 @@
 
 import express from 'express';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import type { ZodRawShapeCompat } from '@modelcontextprotocol/sdk/server/zod-compat.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import {
   SERVER_NAME,
@@ -40,7 +41,7 @@ function createMcpServer(): McpServer {
   });
 
   // Tool 1: list_standards (READ-ONLY)
-  server.registerTool(
+  server.registerTool<any, ZodRawShapeCompat>(
     TOOL_NAMES.LIST_STANDARDS,
     {
       title: 'List Standards',
@@ -59,7 +60,7 @@ Examples:
   - List all standards: {}
   - List backend standards: { filterTier: "backend" }
   - List active principles: { filterType: "principle", filterStatus: "active" }`,
-      inputSchema: ListIndexInputSchema,
+      inputSchema: (ListIndexInputSchema as any).shape as any,
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
@@ -67,11 +68,11 @@ Examples:
         openWorldHint: false,
       },
     },
-    listIndex
+    listIndex as any
   );
 
   // Tool 2: get_standard (READ-ONLY)
-  server.registerTool(
+  server.registerTool<any, ZodRawShapeCompat>(
     TOOL_NAMES.GET_STANDARD,
     {
       title: 'Get Standard',
@@ -92,7 +93,7 @@ Note: Must provide either 'path' OR combination of 'type', 'tier', and 'process'
 Examples:
   - Get by path: { path: "standard-backend-development-spring-boot-security-active.md" }
   - Get by metadata: { type: "standard", tier: "backend", process: "development" }`,
-      inputSchema: GetStandardInputSchema,
+      inputSchema: (GetStandardInputSchema as any).shape as any,
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
@@ -100,11 +101,11 @@ Examples:
         openWorldHint: false,
       },
     },
-    getStandard
+    getStandard as any
   );
 
   // Tool 3: search_standards (READ-ONLY)
-  server.registerTool(
+  server.registerTool<any, ZodRawShapeCompat>(
     TOOL_NAMES.SEARCH_STANDARDS,
     {
       title: 'Search Standards',
@@ -125,7 +126,7 @@ Examples:
   - Search all: { query: "authentication" }
   - Search backend: { query: "security", filterTier: "backend" }
   - Limited results: { query: "testing", limit: 5 }`,
-      inputSchema: SearchStandardsInputSchema,
+      inputSchema: (SearchStandardsInputSchema as any).shape as any,
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
@@ -133,11 +134,11 @@ Examples:
         openWorldHint: false,
       },
     },
-    searchStandardsTool
+    searchStandardsTool as any
   );
 
   // Tool 4: get_standards_metadata (READ-ONLY)
-  server.registerTool(
+  server.registerTool<any, ZodRawShapeCompat>(
     TOOL_NAMES.GET_STANDARDS_METADATA,
     {
       title: 'Get Standards Metadata',
@@ -157,7 +158,7 @@ Examples:
   - Get all metadata: {}
   - Get backend metadata: { filterTier: "backend" }
   - Get active frontend practices: { filterType: "practice", filterTier: "frontend", filterStatus: "active" }`,
-      inputSchema: GetMetadataInputSchema,
+      inputSchema: (GetMetadataInputSchema as any).shape as any,
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
@@ -165,11 +166,11 @@ Examples:
         openWorldHint: false,
       },
     },
-    getMetadata
+    getMetadata as any
   );
 
   // Tool 5: create_standard (DESTRUCTIVE)
-  server.registerTool(
+  server.registerTool<any, ZodRawShapeCompat>(
     TOOL_NAMES.CREATE_STANDARD,
     {
       title: 'Create Standard',
@@ -190,7 +191,7 @@ Parameters:
 
 Example:
   { metadata: { type: "standard", tier: "backend", process: "development", tags: ["api"], author: "Tech Team", status: "active" }, content: "# API Standards\\n..." }`,
-      inputSchema: CreateStandardInputSchema,
+      inputSchema: (CreateStandardInputSchema as any).shape as any,
       annotations: {
         readOnlyHint: false,
         destructiveHint: true,
@@ -198,11 +199,11 @@ Example:
         openWorldHint: false,
       },
     },
-    createStandardTool
+    createStandardTool as any
   );
 
   // Tool 6: update_standard (DESTRUCTIVE)
-  server.registerTool(
+  server.registerTool<any, ZodRawShapeCompat>(
     TOOL_NAMES.UPDATE_STANDARD,
     {
       title: 'Update Standard',
@@ -222,7 +223,7 @@ Examples:
   - Update content: { path: "standard-backend-development-api-active.md", content: "# Updated API Standards\\n..." }
   - Update metadata: { path: "...", metadata: { status: "deprecated" } }
   - Major update: { path: "...", content: "...", versionBump: "major" }`,
-      inputSchema: UpdateStandardInputSchema,
+      inputSchema: (UpdateStandardInputSchema as any).shape as any,
       annotations: {
         readOnlyHint: false,
         destructiveHint: true,
@@ -230,7 +231,7 @@ Examples:
         openWorldHint: false,
       },
     },
-    updateStandardTool
+    updateStandardTool as any
   );
 
   return server;

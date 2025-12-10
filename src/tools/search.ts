@@ -11,7 +11,7 @@ import { formatSearchResults } from '../services/parser.js';
 /**
  * Searches standards by query string with optional filters
  */
-export async function searchStandardsTool(params: SearchStandardsInput): Promise<ToolResponse> {
+export async function searchStandardsTool(params: SearchStandardsInput, _extra?: unknown): Promise<ToolResponse> {
   try {
     const { query, filterType, filterTier, filterProcess, filterTags, limit, responseFormat } =
       params;

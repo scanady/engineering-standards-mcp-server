@@ -13,7 +13,7 @@ import { readStandard } from '../services/storage.js';
 /**
  * Updates an existing standard
  */
-export async function updateStandardTool(params: UpdateStandardInput): Promise<ToolResponse> {
+export async function updateStandardTool(params: UpdateStandardInput, _extra?: unknown): Promise<ToolResponse> {
   try {
     const { path, content, metadata, versionBump } = params;
 

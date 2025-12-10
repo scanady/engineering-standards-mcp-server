@@ -10,7 +10,7 @@ import { buildHierarchicalIndex, formatHierarchicalIndexAsMarkdown } from '../se
 /**
  * Lists all standards in a hierarchical index structure
  */
-export async function listIndex(params: ListIndexInput): Promise<ToolResponse> {
+export async function listIndex(params: ListIndexInput, _extra?: unknown): Promise<ToolResponse> {
   try {
     const { filterType, filterTier, filterProcess, filterStatus, responseFormat } = params;
 

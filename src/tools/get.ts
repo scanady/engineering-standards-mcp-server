@@ -11,7 +11,7 @@ import { formatStandard, formatStandards } from '../services/parser.js';
 /**
  * Gets a standard by path or metadata criteria
  */
-export async function getStandard(params: GetStandardInput): Promise<ToolResponse> {
+export async function getStandard(params: GetStandardInput, _extra?: unknown): Promise<ToolResponse> {
   try {
     const { path, type, tier, process, tags, responseFormat } = params;
 

@@ -11,7 +11,7 @@ import { formatMetadataList } from '../services/parser.js';
 /**
  * Gets metadata for standards matching filter criteria
  */
-export async function getMetadata(params: GetMetadataInput): Promise<ToolResponse> {
+export async function getMetadata(params: GetMetadataInput, _extra?: unknown): Promise<ToolResponse> {
   try {
     const { filterType, filterTier, filterProcess, filterTags, filterStatus, responseFormat } =
       params;
