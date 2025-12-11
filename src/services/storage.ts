@@ -5,7 +5,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { glob } from 'glob';
-import { Standard, StandardMetadata, StandardType, StandardTier, StandardProcess } from '../types.js';
+import { Standard, StandardMetadata } from '../types.js';
 import { STANDARDS_DIR, MARKDOWN_EXTENSION, ERROR_MESSAGES } from '../constants.js';
 import { parseStandard, serializeStandard } from './parser.js';
 import { generateISODate, generateInitialVersion, validateMetadata } from './validator.js';
@@ -240,8 +240,6 @@ export async function updateStandard(
     const parts = basename.split('-');
     // If we have at least 5 parts, try to match old or new patterns
     if (parts.length >= 5) {
-      // Normalize possible type variants to allow matching with plural or singular
-      const [pType, pTier, pProcess] = parts;
       const possibleStatus = parts[3];
       const lastPart = parts[parts.length - 1];
 

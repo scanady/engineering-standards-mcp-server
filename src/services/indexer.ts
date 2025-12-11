@@ -5,7 +5,6 @@
 import {
   Standard,
   StandardMetadata,
-  IndexEntry,
   HierarchicalIndex,
   FilterOptions,
   SearchResult,

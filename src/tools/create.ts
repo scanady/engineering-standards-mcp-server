@@ -11,7 +11,7 @@ import { refreshIndex } from '../services/indexer.js';
 /**
  * Creates a new standard
  */
-export async function createStandardTool(params: CreateStandardInput): Promise<ToolResponse> {
+export async function createStandardTool(params: CreateStandardInput, _extra?: unknown): Promise<ToolResponse> {
   try {
     const { metadata, content, filename } = params;
 
